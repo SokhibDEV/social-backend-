@@ -1,5 +1,5 @@
 import experss from 'express'
-import {getReletionships, addReletionship, deleteReletionship} from '../controlles/relationShipsCont.js'
+import {getReletionships, addReletionship, deleteReletionship} from '../controlles/relationshipsCont'
 const router = experss.Router()
 router.get("/", getReletionships)
 router.post("/", addReletionship)

@@ -29,7 +29,6 @@ export const addReletionship = (req, res) => {
 
 export const deleteReletionship = (req, res) => {
   const token = req.cookies.accessToken;
-
   if (!token) return res.status(401).json("Not logged in!");
   jwt.verify(token, "secretKey", (err, userInfo) => {
     if (err) res.status(403).json("Token is valid!");
