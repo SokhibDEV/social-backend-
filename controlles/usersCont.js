@@ -13,14 +13,12 @@ export const getUser = (req, res) => {
 };
 
 export const updateUser = (req, res) => {
-  console.log(req.body);
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
   jwt.verify(token, "secretKey", (err, userInfo) => {
     if (err) res.status(403).json("Token is valid!");
     const q =
       "UPDATE users SET `name`=?, `city`=?, `website`=?, `profilePic`=?, `coverPic`=? WHERE userId=?";
-
     db.query(
       q,
       [
@@ -30,8 +28,8 @@ export const updateUser = (req, res) => {
         req.body.profilePic,
         req.body.coverPic,
         userInfo.id,
-      ], 
-       (err, data) => {
+      ],
+      (err, data) => {
         if (err) res.status(500).json(err);
         if (data.affectedRows > 0) return res.json("Updated!");
         return res.status(403).json("You can update only your post!");
