@@ -1,0 +1,11 @@
+*inside .gitignore*
+
+
+# dependensies
+/node_modules
+
+# secret
+.env
+
+
+

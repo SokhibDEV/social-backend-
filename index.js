@@ -1,4 +1,5 @@
 import express from "express";
+import 'dotenv/config'
 import userRouter from "./routes/usersRoute.js";
 import authRouter from "./routes/authRoute.js";
 import likeRouter from "./routes/likesRoute.js";
@@ -48,6 +49,6 @@ app.use("/api/posts", postRouter);
 app.use("/api/comments", commentRouter);
 app.use("/api/relationships", relationRouter);
 
-app.listen(8800, () => {
+app.listen(process.env.PORT, () => {
   console.log("Api working...");
 });
