@@ -3,14 +3,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
-  try {
-    const q = "SELECT * FROM users WHERE username =?";
+  const q = "SELECT * FROM users WHERE username =?";
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length) return res.status(409).json("User alredy exist!");
     const salt = bcrypt.genSaltSync(10);
     const hashedPass = bcrypt.hashSync(req.body.password, salt);
-
     const value = [
       req.body.username,
       req.body.email,
@@ -24,17 +22,10 @@ export const register = (req, res) => {
       res.status(200).json("User has been created.");
     });
   });
-    
-  } catch (error) {
-    console.log(error);
-  }
-  
 };
 
 export const login = (req, res) => {
-
-  try {
-    const q = `SELECT * FROM users WHERE username = ?`;
+  const q = `SELECT * FROM users WHERE username = ?`;
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length === 0) return res.status(404).json("User not found!");
@@ -50,25 +41,14 @@ export const login = (req, res) => {
       .status(200)
       .json(others);
   });
-
-  } catch (error) {
-    console.log(error);
-  }
-  
-
 };
 
 export const logout = (req, res) => {
-  try {
-    res
+  res
     .cookie("accessToken", {
       secure: true,
       sameSite: "none",
     })
     .status(200)
     .json("User has been logged out!");
-  } catch (error) {
-    console.log(error);
-  }
- 
 };
