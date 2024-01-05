@@ -1,6 +1,5 @@
 import mysql from 'mysql'
 
-
 export const db = mysql.createConnection({
     connectionLimit: 10,
     host: process.env.DB_HOST,
@@ -9,15 +8,6 @@ export const db = mysql.createConnection({
     database: process.env.DB_NAME,
     port:process.env.DB_PORT
 })
-// export const db = mysql.createConnection({
-//     connectionLimit: 10,
-//     host: "bzmdlqdxndep6fxun3rt-mysql.services.clever-cloud.com",
-//     user: "uab0wddnpmjmmqhc",
-//     password: "Vlr0hKw6DbqSFAzlawT1",
-//     database: "bzmdlqdxndep6fxun3rt",
-//     port:"3306"
-// })
-
 
 db.connect(function(err) {
     if (err) throw err;
